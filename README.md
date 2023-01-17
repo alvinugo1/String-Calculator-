@@ -1,7 +1,7 @@
 # String Calculator 
 
 ## Overview
-Bjarne is jealous of Python’s support for arithmetic with unbounded integers. Help Bjarne to feel
+An arbituary character Bjarne is jealous of Python’s support for arithmetic with unbounded integers. In this project I help Bjarne to feel
 better about C++ by building a calculator to do basic arithmetic operations with arbitrarily large
 numbers represented internally as strings, i.e., sequences of characters .
 
