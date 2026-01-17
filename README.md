@@ -13,7 +13,6 @@ Supported operations include:
 - Negative number handling
 - Input normalization
 
----
 
 ## Motivation
 
@@ -26,7 +25,7 @@ This project explores how large-integer arithmetic can be implemented **from fir
 - Input validation
 - Deterministic normalization of results
 
----
+
 
 ## Project Structure
 
@@ -41,7 +40,7 @@ The project consists of three source files:
 3. **`string_calculator.cpp`**  
    Implements string-based arithmetic logic.
 
----
+
 
 ## Core Functions
 
@@ -50,18 +49,18 @@ The project consists of three source files:
 ```cpp
 unsigned int digit_to_decimal(char digit);
 ```
-Converts a character digit ('0'–'9') to its numeric value.
-- digit_to_decimal('7') → 7
-- Invalid input throws std::invalid_argument
+Converts a character digit (**`'0'`**–**`'9'`**) to its numeric value.
+- **`digit_to_decimal('7')`** → **`7`**
+- Invalid input throws **`std::invalid_argument`**
   
---
+
 
 ```cpp
 char decimal_to_digit(unsigned int decimal);
 ```
-Converts a numeric digit (0–9) to its character representation.
-- decimal_to_digit(7) → '7'
-- Invalid input throws std::invalid_argument
+Converts a numeric digit (**`0`**–**`9`**) to its character representation.
+- **`decimal_to_digit(7)`** → **`'7'`**
+- Invalid input throws **`std::invalid_argument`**
 
 ## Input Normalization
 ```cpp
@@ -71,52 +70,87 @@ Removes unnecessary leading zeros while preserving sign and ensuring a canonical
 
 Examples:
 
-"00123" → "123"
+* **`"00123"`** → **`"123"`**
 
-"-00123" → "-123"
+* **`"-00123"`** → **`"-123"`**
 
-"0000" → "0"
+* **`"0000"`** → **`"0"`**
 
-##Arithmetic Operations
+## Arithmetic Operations
 
 All arithmetic functions operate on normalized numeric strings and return normalized results.
 
-Addition
+### Addition
 
 ```cpp
 std::string add(std::string lhs, std::string rhs);
 ```
+### Examples:
 
-- digit_to_decimal(‘7’) should return 7
-- digit_to_decimal('/') should throw std::invalid_argument
+* **`add("1", "2")`** → **`"3"`**
+  
+* **`add("1", "-2")`** → **`"-1"`**
+  
+* **`add("-1", "2")`** → **`"1"`**
+  
+* **`add("-1", "-2")`** → **`"-3"`**
 
-b. char decimal_to_digit(unsigned int decimal)
+### Subtraction
 
-- decimal_to_digit(7) should return ‘7’
-- decimal_to_digit(36) should throw std::invalid_argument
+```cpp
+std::string subtract(std::string lhs, std::string rhs);
+```
+### Examples:
 
-c. std::string trim_leading_zeros(std::string num)
+* **`subtract("1", "2")`** → **`"-1"`**
 
-- trim_leading_zeros(“00123”) should return 123
-- trim_leading_zeros(“-00123”) should return -123
+* **`subtract("1", "-2")`** → **`"3"`**
 
-d. std::string add(std::string lhs, std::string rhs)
+* **`subtract("-1", "2")`** → **`"-3"`**
 
-- add(“1”, “2”) should return “3”
-- add(“1”, “-2”) should return “-1”
-- add(“-1”, “2”) should return “1”
-- add(“-1”, “-2”) should return “-3”
+* **`subtract("-1", "-2")`** → **`"1" `**
 
-e. std::string subtract(std::string lhs, std::string rhs)
+### Multiplication
 
-- subtract(“1”, “2”) should return “-1”
-- subtract(“1”, “-2”) should return “3”
-- subtract(“-1”, “2”) should return “-3”
-- subtract(“-1”, “-2”) should return “1”
+```cpp
+std::string multiply(std::string lhs, std::string rhs);
+```
 
-f. std::string multiply(std::string lhs, std::string rhs)
+### Examples:
 
-- multiply(“2”, “3”) should return “6”
-- multiply(“2”, “-3”) should return “-6”
-- multiply(“-2”, “3”) should return “-6”
-- multiply(“-2”, “-3”) should return “6”
+* **`multiply("2", "3")`** → **`"6"`**
+
+* **`multiply("2", "-3")`** → **`"-6"`**
+
+* **`multiply("-2", "3")`** → **`"-6"`**
+
+* **`multiply("-2", "-3")`** → **`"6"`**
+
+## Design Notes
+
+* All arithmetic is implemented digit-by-digit in base 10.
+
+* Carry and borrow are handled explicitly.
+
+* Sign handling is isolated from magnitude computation.
+
+* No built-in integer arithmetic is used for calculations.
+
+* All outputs are normalized before returning.
+  
+The implementation prioritizes correctness, robustness, and clarity over micro-optimizations.
+
+
+## Example Execution
+<img width="783" height="543" alt="image" src="https://github.com/user-attachments/assets/e2e91845-8539-481d-aacf-f61f8f9a7cb1" />
+
+## Applications
+This project demonstrates foundational techniques relevant to:
+* Arbitrary-precision math libraries
+* Language runtimes
+* Financial and scientific computation
+* Systems requiring exact integer arithmetic
+
+## Author
+### Alvin Ugo-Mgbemene
+C++ implementation of arbitrary-precision arithmetic using strings.
